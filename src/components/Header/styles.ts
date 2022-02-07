@@ -5,7 +5,7 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 10rem 8.5rem;
+  padding: 1rem 10rem 12rem;
   
   button {
     background-color: var(--blue-light);
