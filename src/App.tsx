@@ -1,9 +1,10 @@
-import React from 'react';
+import { GlobalStyle } from "./styles/global";
 
-function App() {
+ function App() {
   return (
     <div className="App">
-      <p>Hello, world</p>
+      <h1>Hello, world</h1>
+      <GlobalStyle />
     </div>
   );
 }
