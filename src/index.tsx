@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal'
-import { createServer, Model } from 'miragejs'
+import { createServer, Model, Response } from 'miragejs'
 import App from './App';
 
 Modal.setAppElement('#root')
@@ -55,6 +55,17 @@ createServer({
         ...data,
         createdAt: new Date()
       })
+    })
+
+    this.delete('/transactions/:id', (schema, request) => {
+      const { id } = request.params
+      const transaction = schema.find('transaction', id)
+      if(!transaction) {
+        return new Response(404)
+      }
+      transaction.destroy()
+      return new Response(204)
+      
     })
   }
 })

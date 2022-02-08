@@ -1,9 +1,18 @@
 import { useTrasactions } from "../../hooks/useTransactions";
 import { Container } from "./styles";
 
+import deleteImg from '../../assets/delete.svg'
+
 export function TransactionsTable() {
 
-  const { transactions } = useTrasactions()
+  const { transactions, deleteTransaction } = useTrasactions()
+
+  function handleDeleteTransaction(transactionId: number) {
+    if (!window.confirm('Você realmente deseja apagar essa transação?')) {
+      return
+    }
+    deleteTransaction(transactionId)
+  }
 
   return (
     <Container>
@@ -14,6 +23,7 @@ export function TransactionsTable() {
             <th>Preço</th>
             <th>Categoria</th>
             <th>Data</th>
+            <th className="delete">Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +43,11 @@ export function TransactionsTable() {
                 </td>
                 <td>{transaction.category}</td>
                 <td>{date.toLocaleDateString('pt-br')}</td>
+                <td className="delete">
+                  <button onClick={() => handleDeleteTransaction(transaction.id)}>
+                    <img src={deleteImg} alt="Delete" />
+                  </button>
+                </td>
               </tr>
             )
             

@@ -7,16 +7,39 @@ export const Container = styled.div`
     border-spacing: 0 0.5rem;
     color: var(--text);
   }
+
   td {
     border-radius: 5px;
-    padding: 1.25rem 2rem;
+    padding: 1.25rem 1rem;
     background-color: var(--shape);
   }
   th {
-    padding: 0 2rem 0.5rem;
+    padding: 0 1rem 0.5rem;
     text-align: left;
     font-weight: 400;
   }
+
+  td.delete {
+    padding: 1.25rem 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      background: none;
+    }
+    &:hover {
+      img {
+        transform: scale(1.1)
+      }
+    }
+  }
+  th.delete {
+    padding: 0 0 0.5rem;
+    text-align: center;
+  }
+
   td.income {
     color: var(--green);
   }
@@ -25,7 +48,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 400px) {
-    th:last-child, td:last-child {
+    th:nth-child(4), td:nth-child(4) {
       display: none;
     }
   }

@@ -24,6 +24,7 @@ interface TransactionPostResponse {
 interface TransactionContextData {
   transactions: Transaction[],
   addTransaction: (transaction: TransactionInput) => Promise<void>
+  deleteTransaction: (transactionId: number) => Promise<void>
 }
 
 interface TransactionContextProviderProps {
@@ -50,6 +51,15 @@ export function TransactionsContextProvider({ children }: TransactionContextProv
       })
   }, [])
 
+  async function deleteTransaction(transactionId: number) {
+    await api.delete(`/transactions/${transactionId}`)
+    setTransactions(previousTransactions => {
+      return previousTransactions.filter((transaction) => (
+        transaction.id !== transactionId
+      ))
+    })
+  }
+
   async function addTransaction(transaction: TransactionInput) {
     const response = await api.post<TransactionPostResponse>('/transactions', transaction)
     setTransactions(previousTransactions => [
@@ -62,6 +72,7 @@ export function TransactionsContextProvider({ children }: TransactionContextProv
     <TransactionsContext.Provider value={{
       transactions,
       addTransaction,
+      deleteTransaction
     }}>
       {children}
     </TransactionsContext.Provider>
