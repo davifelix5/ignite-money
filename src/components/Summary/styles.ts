@@ -10,6 +10,14 @@ export const Container = styled.div`
   grid-template-columns: repeat(3, 1fr);
   margin: -7rem 0 4rem;
   gap: 1rem;
+  padding: 0 0.75rem;
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    div strong, div small {
+      text-align: center;
+    }
+  }
 `
 
 export const SummaryItem = styled.div<SummaryItemProps>`

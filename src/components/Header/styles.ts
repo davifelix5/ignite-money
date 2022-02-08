@@ -3,11 +3,23 @@ import styled from 'styled-components'
 export const Container = styled.header`
   background-color: var(--blue);
   padding: 1rem 0 12rem;
+  
+  @media (max-width: 400px) {
+    padding-bottom: 10rem;
+    div {
+      flex-direction: column;
+    }
+    button {
+      margin-top: 1rem;
+    }
+  }
+  
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 1120px;
+    padding: 0 0.75rem;
     margin: 0 auto;
     button {
       background-color: var(--blue-light);

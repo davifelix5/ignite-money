@@ -89,4 +89,16 @@ export const GlobalStyle = createGlobalStyle`
       transition: filter 0.2s;
     }
   }
+
+  @media (max-width: 450px) {
+    .react-modal-overlay {
+      align-items: flex-end;
+    }
+
+    .react-modal-content {
+      padding: 2rem 2rem 2.5rem;
+      width: 100%;
+      border-radius: 1rem 1rem 0 0;
+    }
+  }
 `
