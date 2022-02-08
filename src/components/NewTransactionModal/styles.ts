@@ -53,7 +53,10 @@ export const RadioGroup = styled.div`
   gap: 0.5rem;
 
   input {
-    display: none;
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0;
   }
   
   label {
@@ -74,6 +77,16 @@ export const RadioGroup = styled.div`
     justify-content: center;
     cursor: pointer;
     transition: border-color 0.2s;
+  }
+
+  input:focus + label {
+    &[for="income"] {
+      outline: 1px solid var(--green);
+    }
+
+    &[for="outcome"] {
+      outline: 1px solid var(--red);
+    }
   }
 
   input:checked + label {

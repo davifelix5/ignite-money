@@ -58,7 +58,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
     >
       <Container>
         <h2>Cadastrar transação</h2>
-        <button className="closeModalBtn" onClick={onRequestClose}>
+        <button className="closeModalBtn" onClick={onRequestClose} aria-label="Close">
           <img src={close} alt="Close" />
         </button>
 
