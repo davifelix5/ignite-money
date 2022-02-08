@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --title: #363F5F;
     --text: #969CB2;
+    --input-background: #E7E9EE;
 
   }
   
@@ -56,5 +57,36 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     border: none;
+  }
+
+  .react-modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0,0,0,0.4);
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .react-modal-content {
+    position: relative;
+    background-color: var(--background);
+    width: min(576px, 95vw);
+    padding: 2rem 4rem;
+    border-radius: 5px;
+
+    button.closeModalBtn {
+      position: absolute;
+      background: none;
+      top: 1rem;
+      right: 1rem;
+      &:hover {
+        transform: scale(1.1)
+      }
+      transition: filter 0.2s;
+    }
   }
 `

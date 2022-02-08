@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Modal from 'react-modal'
 import { createServer } from 'miragejs'
 import App from './App';
+
+Modal.setAppElement('#root')
 
 createServer({
   routes() {
