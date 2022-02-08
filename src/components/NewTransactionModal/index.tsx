@@ -6,7 +6,7 @@ import income from '../../assets/income.svg'
 import outcome from '../../assets/outcome.svg'
 import close from '../../assets/close.svg'
 
-import { api } from '../../services/api'
+import { useTrasactions } from '../../hooks/useTransactions'
 
 interface NewTransactionModalProps {
   isOpen: boolean
@@ -22,6 +22,8 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
   const [type, setType] = useState<Type>('income')
   const [category, setCategory] = useState('')
 
+  const { addTransaction } = useTrasactions()
+
   function handleChangeTypeRadio(event: ChangeEvent<HTMLInputElement>) {
     setType(event.target.value as Type)
   }
@@ -33,25 +35,18 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
     setCategory('')
   }
 
-  function handleFormSubmit(event: FormEvent) {
+  async function handleFormSubmit(event: FormEvent) {
     event.preventDefault()
     
-    const transaction = {
+    await addTransaction({
       title,
       value,
       type,
       category,
-      createdAt: new Date(),
-    }
-    
-    api.post('/transactions', transaction)
-      .then(() => {
-        onRequestClose()
-        resetInputs()
-      })
-      .catch(() => {
-        alert('Erro ao inserir trasação')
-      })
+    })
+
+    onRequestClose()
+    resetInputs()    
   }
   
   return (
