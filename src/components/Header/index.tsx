@@ -9,8 +9,10 @@ interface HeaderProps {
 export function Header({ onOpenNewTransactionModal }: HeaderProps) {
   return (
     <Container>
-      <img src={logo} alt="dt.money" />
-      <button onClick={onOpenNewTransactionModal}>Nova transação</button>
+      <div>
+        <img src={logo} alt="dt.money" />
+        <button onClick={onOpenNewTransactionModal}>Nova transação</button>
+      </div>
     </Container>
   )
 }

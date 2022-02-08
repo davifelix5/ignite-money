@@ -36,9 +36,9 @@ export const SummaryItem = styled.div<SummaryItemProps>`
       props => 
         props.profit 
         ? 
-          cssVar('--green', '#00ff00') 
+         '#33CC95'
         : 
-          lighten(0.1, cssVar('--red', '#ff0000') as string)
+          lighten(0.1, '#E52E4D')
     };
     color: var(--shape);
     
