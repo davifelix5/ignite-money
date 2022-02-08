@@ -51,7 +51,7 @@ export function Summary() {
         <strong>- {formatCurrency(outcome)}</strong>
       </SummaryItem>
 
-      <SummaryItem profit={total > 0}>
+      <SummaryItem profit={total >= 0}>
         <header>
           <p>Total</p>
           <img src={totalImg} alt="Total" />
