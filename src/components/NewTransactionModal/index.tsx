@@ -1,10 +1,12 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import Modal from 'react-modal'
 import { Container, RadioGroup } from './styles'
 
 import income from '../../assets/income.svg'
 import outcome from '../../assets/outcome.svg'
 import close from '../../assets/close.svg'
-import { ChangeEvent, useState } from 'react'
+
+import { api } from '../../services/api'
 
 interface NewTransactionModalProps {
   isOpen: boolean
@@ -15,13 +17,41 @@ type Type = 'income' | 'outcome'
 
 export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionModalProps) {
   
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
+  const [title, setTitle] = useState('')
+  const [value, setValue] = useState(0)
   const [type, setType] = useState<Type>('income')
   const [category, setCategory] = useState('')
 
   function handleChangeTypeRadio(event: ChangeEvent<HTMLInputElement>) {
     setType(event.target.value as Type)
+  }
+
+  function resetInputs() {
+    setTitle('')
+    setValue(0)
+    setType('income')
+    setCategory('')
+  }
+
+  function handleFormSubmit(event: FormEvent) {
+    event.preventDefault()
+    
+    const transaction = {
+      title,
+      value,
+      type,
+      category,
+      createdAt: new Date(),
+    }
+    
+    api.post('/transactions', transaction)
+      .then(() => {
+        onRequestClose()
+        resetInputs()
+      })
+      .catch(() => {
+        alert('Erro ao inserir trasação')
+      })
   }
   
   return (
@@ -37,25 +67,25 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
           <img src={close} alt="Close" />
         </button>
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="inputControl">
             <input 
               type="text" 
               placeholder="Nome" 
-              name="name" 
-              id="name" 
-              value={name}
-              onChange={e => setName(e.target.value)}
+              name="title" 
+              id="title" 
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             />
           </div>
           <div className="inputControl">
             <input 
-              type="text" 
+              type="number" 
               placeholder="Preço" 
-              name="preco" 
-              id="preco"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
+              name="value" 
+              id="value"
+              value={value}
+              onChange={e => setValue(Number(e.target.value))}
             />
           </div>
           <RadioGroup className="inputControl">
@@ -92,8 +122,8 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
             <input 
               type="text" 
               placeholder="Categoria" 
-              name="categoria" 
-              id="categoria" 
+              name="category" 
+              id="category" 
               value={category}
               onChange={e => setCategory(e.target.value)}
             />

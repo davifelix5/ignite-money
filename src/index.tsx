@@ -1,21 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal'
-import { createServer } from 'miragejs'
+import { createServer, Model } from 'miragejs'
 import App from './App';
 
 Modal.setAppElement('#root')
 
 createServer({
-  routes() {
-    this.namespace = 'api'
+  models: {
+    transaction: Model
+  },
 
-    this.get('/transactions', () => {
-      return [
+  seeds(server) {
+    server.db.loadData({
+      transactions: [
         {
           id: 1, 
           title: 'Salario', 
-          amount: 5000, 
+          value: 5000, 
           type: 'income', 
           category: 'Trabalho', 
           createdAt: new Date()
@@ -23,7 +25,7 @@ createServer({
         {
           id: 2, 
           title: 'Almoço', 
-          amount: 30, 
+          value: 30, 
           type: 'outcome', 
           category: 'Alimenção', 
           createdAt: new Date()
@@ -31,13 +33,26 @@ createServer({
         {
           id: 3, 
           title: 'Aluguel', 
-          amount: 1500, 
+          value: 1500, 
           type: 'outcome', 
           category: 'Despesa fixa', 
           createdAt: new Date()
         },
       ]
-    })    
+    })
+  },
+
+  routes() {
+    this.namespace = 'api'
+
+    this.get('/transactions', () => {
+      return this.schema.all('transaction')
+    })
+    
+    this.post('/transactions', (schema, request) => {
+      const data = JSON.parse(request.requestBody)
+      return schema.create('transactions', data)
+    })
   }
 })
 
