@@ -24,13 +24,13 @@ export const Container = styled.div`
     color: var(--red);
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 400px) {
     th:last-child, td:last-child {
       display: none;
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 800px) {
     th:nth-child(3), td:nth-child(3) {
       display: none;
     }
