@@ -7,6 +7,7 @@ import outcome from '../../assets/outcome.svg'
 import close from '../../assets/close.svg'
 
 import { useTrasactions } from '../../hooks/useTransactions'
+import { CurrencyInputMask } from '../CurrencyInputMask'
 
 interface NewTransactionModalProps {
   isOpen: boolean
@@ -74,13 +75,12 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
             />
           </div>
           <div className="inputControl">
-            <input 
-              type="number" 
+            <CurrencyInputMask 
               placeholder="Preço" 
               name="value" 
               id="value"
               value={value}
-              onChange={e => setValue(Number(e.target.value))}
+              setValue={(number) => setValue(number)}
             />
           </div>
           <RadioGroup className="inputControl">
