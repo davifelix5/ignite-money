@@ -1,5 +1,5 @@
 import { useTrasactions } from "../../hooks/useTransactions";
-import { Container } from "./styles";
+import { Container, SummaryItem } from "./styles";
 
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
@@ -35,29 +35,29 @@ export function Summary() {
 
   return (
     <Container>
-      <div>
+      <SummaryItem>
         <header>
           <p>Entradas</p>
           <img src={incomeImg} alt="Income" />
         </header>
         <strong>{formatCurrency(income)}</strong>
-      </div>
+      </SummaryItem>
 
-      <div>
+      <SummaryItem>
         <header>
           <p>Saídas</p>
           <img src={outcomeImg} alt="Outcome" />
         </header>
         <strong>- {formatCurrency(outcome)}</strong>
-      </div>
+      </SummaryItem>
 
-      <div>
+      <SummaryItem profit={total > 0}>
         <header>
           <p>Total</p>
           <img src={totalImg} alt="Total" />
         </header>
         <strong>{formatCurrency(total)}</strong>
-      </div>
+      </SummaryItem>
     </Container>
   )
 }
