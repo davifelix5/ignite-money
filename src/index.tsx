@@ -20,7 +20,7 @@ createServer({
           value: 5000, 
           type: 'income', 
           category: 'Trabalho', 
-          createdAt: new Date()
+          createdAt: new Date('2022-02-06 10:20:00')
         },
         {
           id: 2, 
@@ -28,7 +28,7 @@ createServer({
           value: 30, 
           type: 'outcome', 
           category: 'Alimenção', 
-          createdAt: new Date()
+          createdAt: new Date('2022-02-05 19:40')
         },
         {
           id: 3, 
@@ -36,7 +36,7 @@ createServer({
           value: 1500, 
           type: 'outcome', 
           category: 'Despesa fixa', 
-          createdAt: new Date()
+          createdAt: new Date('2022-02-04 18:20')
         },
       ]
     })

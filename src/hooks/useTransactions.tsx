@@ -39,7 +39,14 @@ export function TransactionsContextProvider({ children }: TransactionContextProv
   useEffect(() => {
     api.get<TransactionGetResponse>('/transactions')
       .then(response => {
-        setTransactions(response.data.transactions)
+
+        function sortByDateAcs(transaction1: Transaction, transaction2: Transaction) {
+          const timeTransaction1 = new Date(transaction1.createdAt).getTime()
+          const timeTransaction2 = new Date(transaction2.createdAt).getTime()
+          return timeTransaction1 - timeTransaction2
+        }
+
+        setTransactions(response.data.transactions.sort(sortByDateAcs))
       })
   }, [])
 

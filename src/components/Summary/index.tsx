@@ -19,6 +19,15 @@ export function Summary() {
     return totalValue
   }
 
+  function getLastTransactionDateByType(type: Type) {
+    const [ lastTransactionOfType ] = transactions
+      .filter((transaction) => transaction.type === type)
+      .slice(-1)
+
+    return new Date(lastTransactionOfType?.createdAt)
+      .toLocaleDateString('pt-br')
+  }
+
   function formatCurrency(number: number) {
     const formatedValue = new Intl.NumberFormat('pt-br', {
       style: 'currency',
@@ -30,8 +39,18 @@ export function Summary() {
 
   const income = calculateTransactionsTotalValueByType('income')
   const outcome = calculateTransactionsTotalValueByType('outcome')
-
   const total = income - outcome 
+ 
+  const lastIncomeDate = getLastTransactionDateByType('income')
+  const lastOutcomeDate = getLastTransactionDateByType('outcome')
+
+  const firstTransaction = transactions[0]
+  const firstTransactionDate = new Date(firstTransaction?.createdAt)
+    .toLocaleDateString('pt-br')
+    
+  const lastTransaction = transactions[transactions.length - 1]
+  const lastTransactionDate = new Date(lastTransaction?.createdAt)
+    .toLocaleDateString('pt-br')
 
   return (
     <Container>
@@ -41,6 +60,7 @@ export function Summary() {
           <img src={incomeImg} alt="Income" />
         </header>
         <strong>{formatCurrency(income)}</strong>
+        <small>Ultima entrada no dia {lastIncomeDate}</small>
       </SummaryItem>
 
       <SummaryItem>
@@ -49,6 +69,7 @@ export function Summary() {
           <img src={outcomeImg} alt="Outcome" />
         </header>
         <strong>- {formatCurrency(outcome)}</strong>
+        <small>Ultima saída no dia {lastOutcomeDate}</small>
       </SummaryItem>
 
       <SummaryItem profit={total >= 0}>
@@ -57,6 +78,7 @@ export function Summary() {
           <img src={totalImg} alt="Total" />
         </header>
         <strong>{formatCurrency(total)}</strong>
+        <small>De {firstTransactionDate} até {lastTransactionDate}</small>
       </SummaryItem>
     </Container>
   )

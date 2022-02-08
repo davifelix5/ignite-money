@@ -25,6 +25,12 @@ export const SummaryItem = styled.div<SummaryItemProps>`
     font-size: 2rem;
     font-weight: 600;
   }
+  small {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    color: var(--text);
+  }
 
   color: var(--title);
   padding: 1.5rem 2rem;
@@ -41,6 +47,11 @@ export const SummaryItem = styled.div<SummaryItemProps>`
           lighten(0.1, '#E52E4D')
     };
     color: var(--shape);
+
+    small {
+      color: var(--shape);
+      font-weight: 500;
+    }
     
   }
 `
