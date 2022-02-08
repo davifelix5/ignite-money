@@ -18,7 +18,7 @@ createServer({
           amount: 5000, 
           type: 'income', 
           category: 'Trabalho', 
-          description: 'Salário mensal'
+          createdAt: new Date()
         },
         {
           id: 2, 
@@ -26,7 +26,7 @@ createServer({
           amount: 30, 
           type: 'outcome', 
           category: 'Alimenção', 
-          description: 'Almoço fora'
+          createdAt: new Date()
         },
         {
           id: 3, 
@@ -34,7 +34,7 @@ createServer({
           amount: 1500, 
           type: 'outcome', 
           category: 'Despesa fixa', 
-          description: 'Pagamento do aluguel'
+          createdAt: new Date()
         },
       ]
     })    
