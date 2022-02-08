@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken, lighten, cssVar } from 'polished'
+import { darken, transparentize, cssVar } from 'polished'
 
 export const Container = styled.div`
   h2 {
@@ -80,11 +80,11 @@ export const RadioGroup = styled.div`
     
     
     &[for="income"] {
-      background-color: ${lighten(0.4, cssVar('--green', '#00ff00') as string)};
+      background-color: ${transparentize(0.9, cssVar('--green', '#00ff00') as string)};
     }
 
     &[for="outcome"] {
-      background-color: ${lighten(0.4, cssVar('--red', '#ff0000') as string)};
+      background-color: ${transparentize(0.9, cssVar('--red', '#ff0000') as string)};
     }
 
   }
